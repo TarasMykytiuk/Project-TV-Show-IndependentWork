@@ -1,3 +1,35 @@
 #root {
   color: red;
+  background-color: lightgray;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+
+.card {
+  color: black;
+  width: 80%;
+  background-color: white;
+  text-align: center;
+  margin: 25px;
+  height: 600px;
+  justify-self: center;
+}
+
+.card h2 {
+  width: calc(100% - 4px);
+  border: 2px solid gray;
+  border-radius: 5px;
+  text-align: center;
+  padding: 25px 0;
+  margin: 0;
+}
+
+.card img {
+  margin: 10px auto;
+}
+
+.card p {
+  max-width: 60%;
+  text-align: justify;
+  margin: 10px auto;
 }
