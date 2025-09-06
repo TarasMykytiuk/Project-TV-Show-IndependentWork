@@ -5,6 +5,16 @@
   grid-template-columns: 33% 33% 33%;
 }
 
+#navigation {
+  display: flex;
+  margin: 25px;
+  justify-content: flex-start;
+}
+
+#navigation div {
+  margin: 0 25px 0 0;
+}
+
 .card {
   color: black;
   width: 80%;
