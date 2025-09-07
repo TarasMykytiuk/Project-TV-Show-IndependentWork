@@ -1,10 +1,22 @@
 const navBar = document.getElementById("navigation");
 const rootElem = document.getElementById("root");
 
-function setup() {
-  const allEpisodes = getAllEpisodes();
+async function setup() {
+  const allEpisodes = await getAllEpisodes("https://api.tvmaze.com/shows/82/episodes");
   populateSearchBar(allEpisodes);
   makePageForEpisodes(allEpisodes);
+}
+
+async function getAllEpisodes(api_url) {
+  let episodes = [];
+  try {
+    const response = await fetch(api_url);
+    const data = await response.json();
+    episodes = Array.from(data);
+    return episodes;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function populateSearchBar(allEpisodes) {
