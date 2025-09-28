@@ -1,5 +1,6 @@
 const navBar = document.getElementById("navigation");
 const rootElem = document.getElementById("root");
+const loader = document.querySelector('#loader');
 
 const fetchedData = {};
 
@@ -14,6 +15,7 @@ async function setup() {
   const allShows = await getAllShows("https://api.tvmaze.com/shows");
   await populateData(allShows);
   populateSearchBar(allShows);
+  loader.style.display = 'none';
 }
 
 async function getAllEpisodes(show_id) {
