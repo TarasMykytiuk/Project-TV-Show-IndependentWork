@@ -2,20 +2,19 @@ const navBar = document.getElementById("navigation");
 const rootElem = document.getElementById("root");
 const loader = document.querySelector('#loader');
 
-const fetchedData = {};
+const fetchedShows = {};
+const fetchedEpisodes = {};
 
-async function populateData(allShows) {
-  for (show in allShows) {
-    const allEpisodes = await getAllEpisodes(show);
-    fetchedData[show] = allEpisodes;
+async function getAllShows(api_url) {
+  let shows = [];
+  try {
+    const response = await fetch(api_url);
+    const data = await response.json();
+    shows = Array.from(data);
+    return shows;
+  } catch (error) {
+    console.log(error);
   }
-}
-
-async function setup() {
-  const allShows = await getAllShows("https://api.tvmaze.com/shows");
-  await populateData(allShows);
-  populateSearchBar(allShows);
-  loader.style.display = 'none';
 }
 
 async function getAllEpisodes(show_id) {
@@ -31,23 +30,23 @@ async function getAllEpisodes(show_id) {
   }
 }
 
-async function getAllShows(api_url) {
-  let shows = [];
-  try {
-    const response = await fetch(api_url);
-    const data = await response.json();
-    shows = Array.from(data);
-    return shows;
-  } catch (error) {
-    console.log(error);
+async function fetchData() {
+  const allShows = await getAllShows("https://api.tvmaze.com/shows");
+  for (let i = 0; i < allShows.length; i++) {
+    fetchedShows[i + 1] = allShows[i];
+    const allEpisodes = await getAllEpisodes(i + 1);
+    fetchedEpisodes[i + 1] = allEpisodes;
   }
 }
 
-function populateSearchBar(allShows) {
-  createShowSelector(allShows);
+async function setup() {
+  await fetchData();
+  createShowsSelector(fetchedShows, "episodes");
+  loader.style.display = 'none';
 }
 
-function createShowSelector(allShows) {
+
+function createShowsSelector(shows, pageListing) {
   const showSelector = document.createElement("select");
   showSelector.setAttribute("id", "show-selector");
   showSelector.setAttribute("name", "show-selector");
@@ -57,24 +56,25 @@ function createShowSelector(allShows) {
   showSelectorDiv.appendChild(showSelector);
   navBar.appendChild(showSelectorDiv);
 
-  allShows.forEach((show) => {
+  for (const [id, show] of Object.entries(shows)) {
     optionText = show.name;
     const option = document.createElement("option");
-    option.value = show.id;
+    option.value = id;
     option.textContent = optionText;
     showSelector.appendChild(option);
-  });
+  }
 
-  showsEpisodesRender(showSelector.value);
-
-  showSelector.addEventListener("change", () => {
-    const show_id = showSelector.value;
-    showsEpisodesRender(show_id)
-  });
+  if (pageListing == "episodes") {
+    showsEpisodesRender(showSelector.value);
+    showSelector.addEventListener("change", () => {
+      const show_id = showSelector.value;
+      showsEpisodesRender(show_id)
+    });
+  }
 }
 
 function showsEpisodesRender(show_id) {
-  const allEpisodes = fetchedData[show_id];
+  const allEpisodes = fetchedEpisodes[show_id];
   createEpisodesSelector(allEpisodes);
   createEpisodesInput(allEpisodes);
   createCountArea(allEpisodes);
