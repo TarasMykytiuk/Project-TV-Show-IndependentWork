@@ -11,8 +11,6 @@
 #root {
   color: red;
   background-color: lightgray;
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
 }
 
 #navigation {
@@ -52,4 +50,105 @@
   max-width: 60%;
   text-align: justify;
   margin: 10px auto;
+}
+
+.episodes-cards-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+
+.show-cards-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.show-card {
+  color: black;
+  background-color: white;
+  box-shadow: 10px 5px 5px gray;
+  border-radius: 5px;
+  text-align: center;
+  margin: 20px 20px 0 20px;
+}
+
+.show-card h1 {
+  text-align: left;
+  margin: 20px 0 0 20px;
+}
+
+.show-card h1:hover {
+  cursor: pointer;
+}
+
+.show-content {
+  display: flex;
+  padding: 5px;
+}
+
+.show-content img {
+  padding: 15px;
+}
+
+.show-content p {
+  padding: 15px;
+  text-align: justify;
+}
+
+.show-content .show-info {
+  min-width: 300px;
+  padding: 15px;
+  border: 1px solid black;
+  margin: 0 15px 15px 5px;
+}
+
+.show-info-item {
+  display: flex;
+}
+
+.show-info-item .info-item-name {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+#show-input-div,
+#show-selector-div,
+#episode-selector-div,
+#episode-input-div {
+  display: flex;
+  align-items: center;
+}
+
+#show-selector,
+#episode-selector,
+#episode-input,
+#show-input,
+#show-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: rgb(225, 224, 224);
+  height: 34px;
+  padding: 8px 12px;
+  font-size: 12px;
+  border: 2px solid rgb(31, 30, 30);
+  border-radius: 5px;
+  margin-left: 15px;
+}
+
+#backToShowListingButton {
+  background: rgb(225, 224, 224);
+  height: 34px;
+  padding: 8px 12px;
+  font-size: 12px;
+  border: 2px solid rgb(31, 30, 30);
+  border-radius: 5px;
+}
+
+#count-area {
+  color: rgb(83, 82, 82);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
 }
