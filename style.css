@@ -135,6 +135,7 @@
   border: 2px solid rgb(31, 30, 30);
   border-radius: 5px;
   margin-left: 15px;
+  max-width: 300px;
 }
 
 #backToShowListingButton {
