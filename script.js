@@ -306,8 +306,8 @@ function makeShowCard(show, parentDom) {
   const nameDom = document.createElement("h1");
   nameDom.textContent = show.name;
   // if show name clicked, episodes listing displayed
-  nameDom.addEventListener("click", () => {
-    createShowsSelector(fetchedShows, "episodes", show.id);
+  nameDom.addEventListener("click", async () => {
+    await renderPage("episodes", fetchedShows, show.id);
   });
 
   const contentDom = document.createElement("div");
